@@ -56,24 +56,26 @@
 </nav>
 
 
+
+
+
+
 <section class="hero">
   <div class="hero-body">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-2 publication-title">FALCON: Frequency Adjoint Link with CONtinuous density mask for fast single image dehazing</h1>
-          <div class="is-size-5 publication-authors">
 
+          <h1 class="title is-2 publication-title">FALCON: Frequency Adjoint Link with CONtinuous density mask for fast single image dehazing</h1>
+
+          <div class="is-size-5 publication-authors">
             <span class="author-block">
               <a>Anonymous 2226</a>
             </span>
           </div>
 
-  
-
-          <div class="column has-text-centered">
+          <!-- <div class="column has-text-centered">
             <div class="publication-links">
-   
               <span class="link-block">
                 <a href="https://github.com/2226anno"
                    class="external-link button is-normal is-rounded is-dark">
@@ -83,98 +85,208 @@
                   <span>Code</span>
                   </a>
               </span>
-
             </div>
+          </div> -->
 
-          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
+
+
+<!-- Main Image -->
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <img src="./static/images/main1.png" alt="main" height="100%">
-      <h2 class="subtitle has-text-centered">
-        Overview illustration of our model, <b>FALCON</b>.  <br>
-        blablabla
-        </h2>
+
+      <table width=100%>
+        <tr>
+          <td width=45%>
+            <img src="./static/Figures/overview.png" alt="main" height="100%">
+          </td>
+          <td width=10%></td>
+          <td width=45%>
+            <img src="./static/Figures/scatter_chart.png" alt="main" height="100%">
+          </td>
+        </tr>
+      </table>
+
+      <table width=100%>
+        <tr>
+          <td width=45%>
+            <h2 class="subtitle has-text-centered">
+              Overview of <b>FALCON</b>
+            </h2>
+          </td>
+          <td width=10%></td>
+          <td width=45%>
+            <h2 class="subtitle has-text-centered">
+              Comparison of <b>FALCON</b>
+            </h2>
+          </td>
+        </tr>
+      </table>
+
     </div>
   </div>
 </section>
 
 
-
+<!-- Abstract -->
 <section class="section">
   <div class="container is-max-desktop">
-    <!-- Abstract. -->
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           Image dehazing, addressing atmospheric interference like fog and haze, remains a pervasive challenge crucial for robust vision applications such as surveillance and remote sensing under adverse visibility. While various methodologies have evolved from early works predicting transmission matrix and atmospheric light features to deep learning and dehazing networks, they innately prioritize dehazing quality metrics, neglecting the need for real-time applicability in time-sensitive domains like autonomous driving. This work introduces FALCON (Frequency Adjoint Link with CONtinuous density map), a single-image dehazing system achieving state-of-the-art performance on both quality and speed. Particularly, we develop a novel bottleneck module, namely, Frequency Adjoint Link, operating in the frequency space to globally expand the receptive field with minimal growth in network size. Further, we leverage the underlying haze distribution based on the atmospheric scattering model via a Continuous Density Mask (CDM) which serves as a continuous-valued mask input prior and a differentiable auxiliary loss. Comprehensive experiments involving multiple state-of-the-art methods and ablation analysis demonstrate FALCON's exceptional performance in both dehazing quality and speed (i.e., >180 frames-per-second), quantified by metrics such as FPS, PSNR, and SSIM.
-          </div>
-      </div>
-    </div>
-
-  </div>
-
-
-</section>
-
-    <section class="section">
-  <div class="container is-max-desktop">
-
-    <div class="columns is-centered">
-      <div class="column is-four-fifths">
-        <h3 class="title is-3 has-text-centered">Method</h3>
-        
-        <div class="content has-text-centered">
-          <img src="./static/images/main2.png" alt="Main figure">
-        </div>
-        <div class="content has-text-justified">
-          <p>
-            FALCON method
-          </p>
         </div>
       </div>
     </div>
-    
   </div>
 </section>
-  
-  <section class="section">
-  <div class="container is-max-desktop">
 
-    <div class="columns is-centered">
-      <div class="column is-four-fifths">
-        <h3 class="title is-3 has-text-centered">Results1</h3>
-        
-        <div class="content has-text-centered">
-          <img src="./static/images/main3.png" alt="Main figure">
-        </div>
-        <div class="content has-text-justified">
-          <p>
-            FALCON results
-          </p>
-        </div>
-      </div>
-    </div>
-    
-  </div>
-</section>
-  
+
+<!-- Method -->
 <section class="section">
   <div class="container is-max-desktop">
-
     <div class="columns is-centered">
       <div class="column is-four-fifths">
-        <h3 class="title is-3 has-text-centered">Results2</h3>
+
+        <h3 class="title is-3 has-text-centered">Method</h3>
+
+        <div class="content has-text-centered">
+          <img src="./static/Figures/arch.png" alt="Main figure">
+          <p>
+            Overall Pipeline of <b>FALCON</b>
+          </p>
+        </div>
+
+        <div class="content has-text-justified">
+          <p>
+            (1) First, our model uniquely computes the haze density map, namely, Continuous Density Mask (CDM), based on the principal from the Dark Channel Prior (DCP). In particular, the original density map calculation involves a nested minimization which is seemingly non-differentiable and CPU-intensive. However, we identify that this process easily equates to a special type of pooling, turning the density map estimation to be an extremely computationally efficient process. <br><br>
+            (2) Next, we introduce our novel Frequency Adjoint Link (FAL) module which greatly improves the vanilla U-Net by efficiently expanding the receptive field with minimal network size increase. <br><br>
+            (3) Lastly, our differentiable density map estimation allows us to incorporate a new kind of loss function based on the density map.
+          </p>
+        </div>
+
+      </div>
+    </div> 
+  </div>
+</section>
+ 
+
+<!-- Qualitative Results -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h3 class="title is-3 has-text-centered">Qualitative Results</h3> 
         
         <div class="content has-text-centered">
-          <img src="./static/images/main4.png" alt="Main figure">
+          <img src="./static/Figures/compare_Dense.png" alt="Main figure">
+          <p>
+            Comparative Visualization on Dense-Haze
+          </p>
+        </div>
+        
+
+        <div class="content has-text-centered">
+          <img src="./static/Figures/compare_NH2.png" alt="Main figure">
+          <p>
+            Comparative Visualization on NH-Haze2
+          </p>
+        </div>
+
+        <table width=100%>
+          <tr>
+            <td width=32%>
+              <img src="./static/Figures/Dense.png" alt="main" height="100%">
+            </td>
+            <td width=2%></td>
+            <td width=32%>
+              <img src="./static/Figures/NH1.png" alt="main" height="100%">
+            </td>
+            <td width=2%></td>
+            <td width=32%>
+              <img src="./static/Figures/NH2.png" alt="main" height="100%">
+            </td>
+          </tr>
+        </table>
+        
+        <table width=100%>
+          <tr>
+            <td width=32%>
+              <div class="content has-text-centered">
+                <p>
+                  Results on Dense-Haze
+                </p>
+              </div>
+            </td>
+            <td width=2%></td>
+            <td width=32%>
+              <div class="content has-text-centered">
+                <p>
+                  Results on NH-Haze
+                </p>
+              </div>
+            </td>
+            <td width=2%></td>
+            <td width=32%>
+              <div class="content has-text-centered">
+                <p>
+                  Results on NH-Haze2
+                </p>
+              </div>
+            </td>
+          </tr>
+        </table>
+
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Quantitative Results -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h3 class="title is-3 has-text-centered">Quantitative Results</h3>
+
+        <div class="content has-text-centered">
+          <img src="./static/Figures/table_main.png" alt="Main figure">
+          <p>
+            Quantitative Comparisons
+          </p>
+        </div>
+
+        <div class="content has-text-centered">
+          <img src="./static/Figures/table_FPS.png" alt="Main figure" width="70%">
+          <p>
+            Performance comparison of FPS
+          </p>
+        </div>
+
+      </div>
+    </div>
+    
+  </div>
+</section>
+
+
+<!-- FPS -->
+<!-- <section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h3 class="title is-3 has-text-centered">Inference Speed</h3>
+        <div class="content has-text-centered">
+          <img src="./static/Figures/table_FPS.png" alt="Main figure">
         </div>
         <div class="content has-text-justified">
           <p>
@@ -185,9 +297,62 @@
     </div>
     
   </div>
+</section> -->
+
+
+<!-- Versatility of CDM -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h3 class="title is-3 has-text-centered">Versatility of CDM</h3>
+
+        <div class="content has-text-centered">
+          <img src="./static/Figures/table_cdm.png" alt="Main figure" width="50%">
+          <p>
+            CDM on Various Networks
+          </p>
+        </div>
+
+        <div class="content has-text-centered">
+          <img src="./static/Figures/cdm_unet.png" alt="Main figure">
+          <p>
+            Effect of CDM on U-Net
+          </p>
+        </div>
+
+        <div class="content has-text-centered">
+          <img src="./static/Figures/cdm_unetpp.png" alt="Main figure">
+          <p>
+            Effect of CDM on Unet++
+          </p>
+        </div>
+
+        <div class="content has-text-centered">
+          <img src="./static/Figures/cdm_ffanet.png" alt="Main figure">
+          <p>
+            Effect of CDM on FFA-Net
+          </p>
+        </div>
+
+        <div class="content has-text-centered">
+          <img src="./static/Figures/cdm_msbdn.png" alt="Main figure">
+          <p>
+            Effect of CDM on MSBDN
+          </p>
+        </div>
+
+      </div>
+    </div>
+    
+  </div>
 </section>
 
+
 </section>
+
+
+
 
 
 <footer class="footer">
